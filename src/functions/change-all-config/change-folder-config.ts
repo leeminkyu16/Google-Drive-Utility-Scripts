@@ -14,7 +14,10 @@ export const changeFolderConfig_ = ({
     targetFolder: GoogleAppsScript.Drive.Folder;
     shareableByEditors: Optional<boolean>;
 }): void => {
-    if (shareableByEditors !== undefined) {
+    if (
+        shareableByEditors !== undefined &&
+        targetFolder.isShareableByEditors() === shareableByEditors
+    ) {
         targetFolder.setShareableByEditors(shareableByEditors);
     }
 };

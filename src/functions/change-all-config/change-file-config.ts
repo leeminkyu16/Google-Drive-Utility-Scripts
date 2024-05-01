@@ -14,8 +14,11 @@ export const changeFileConfig_ = ({
     targetFile: GoogleAppsScript.Drive.File;
     shareableByEditors: Optional<boolean>;
 }): void => {
-    if (shareableByEditors !== undefined &&
-        targetFile.getOwner().getEmail() === Session.getEffectiveUser().getEmail()) {
+    if (
+        shareableByEditors !== undefined &&
+        targetFile.isShareableByEditors() === shareableByEditors &&
+        targetFile.getOwner().getEmail() === Session.getEffectiveUser().getEmail()
+    ) {
         targetFile.setShareableByEditors(shareableByEditors);
     }
 };
